@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <h2 class="sr-only">
+      Contacts database manager — add, edit, search, and delete contacts
+    </h2>
+
+    <div id="app">
+      <div class="page-header">
+        <div class="page-title">Contacts</div>
+        <div class="page-sub">local db &mdash; fetch / update / delete</div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Total</div>
+          <div class="stat-val" id="s-total">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Work</div>
+          <div class="stat-val" id="s-work">0</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">VIP</div>
+          <div class="stat-val" id="s-vip">0</div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="search-wrap">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input
+            id="search"
+            type="text"
+            placeholder="Search contacts…"
+            oninput="render()"
+          />
+        </div>
+        <button class="btn-add" onclick="openModal()">
+          <i class="ti ti-plus" aria-hidden="true"></i>Add contact
+        </button>
+      </div>
+
+      <div id="frame">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Tag</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <div class="overlay" id="overlay">
+          <div class="modal">
+            <div class="modal-title" id="modal-title">New contact</div>
+            <div class="modal-row">
+              <div class="field">
+                <label>First name</label
+                ><input id="f-first" type="text" placeholder="Ada" />
+              </div>
+              <div class="field">
+                <label>Last name</label
+                ><input id="f-last" type="text" placeholder="Lovelace" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Email</label
+              ><input id="f-email" type="email" placeholder="ada@example.com" />
+            </div>
+            <div class="field">
+              <label>Phone</label
+              ><input id="f-phone" type="tel" placeholder="+1 (555) 000-0000" />
+            </div>
+            <div class="field">
+              <label>Tag</label>
+              <select id="f-tag">
+                <option value="work">Work</option>
+                <option value="personal">Personal</option>
+                <option value="vip">VIP</option>
+              </select>
+            </div>
+            <div class="modal-actions">
+              <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+              <button class="btn-save" onclick="saveContact()">Save</button>
+            </div>
+          </div>
+        </div>
+        <div class="toast" id="toast"></div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
