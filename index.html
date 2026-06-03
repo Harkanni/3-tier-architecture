@@ -1,25 +1,456 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
-    />
+    <title>Contacts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <link rel="stylesheet" href="./styles.css" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --bg: #f9f9f8;
+        --surface: #ffffff;
+        --surface-2: #f3f3f1;
+        --border: #e5e5e3;
+        --border-strong: #d0d0ce;
+        --text-1: #141413;
+        --text-2: #6b6b68;
+        --text-3: #a8a8a5;
+        --accent: #2c2c2a;
+        --accent-subtle: #e8e8e6;
+        --tag-work-bg: #e8e8e6; --tag-work-fg: #3a3a38;
+        --tag-personal-bg: #f0f0ee; --tag-personal-fg: #5a5a58;
+        --tag-vip-bg: #2c2c2a; --tag-vip-fg: #f9f9f8;
+        --danger: #c0392b; --danger-bg: #fdf0ef;
+        --radius: 10px;
+        --radius-sm: 6px;
+        --transition: 0.18s ease;
+      }
+
+      [data-theme="dark"] {
+        --bg: #111110;
+        --surface: #1a1a18;
+        --surface-2: #222220;
+        --border: #2e2e2c;
+        --border-strong: #3e3e3c;
+        --text-1: #f2f2f0;
+        --text-2: #9a9a97;
+        --text-3: #5c5c5a;
+        --accent: #e8e8e6;
+        --accent-subtle: #2c2c2a;
+        --tag-work-bg: #2c2c2a; --tag-work-fg: #c8c8c6;
+        --tag-personal-bg: #252523; --tag-personal-fg: #9a9a97;
+        --tag-vip-bg: #e8e8e6; --tag-vip-fg: #1a1a18;
+        --danger: #e05c4e; --danger-bg: #2a1a18;
+      }
+
+      body {
+        font-family: 'DM Sans', sans-serif;
+        background: var(--bg);
+        color: var(--text-1);
+        font-size: 15px;
+        line-height: 1.5;
+        transition: background var(--transition), color var(--transition);
+        min-height: 100vh;
+      }
+
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
+      #app {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+
+      .page-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .page-header-left { display: flex; flex-direction: column; gap: 2px; }
+
+      .page-title {
+        font-size: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        color: var(--text-1);
+      }
+
+      .page-sub {
+        font-size: 12px;
+        font-family: 'DM Mono', monospace;
+        color: var(--text-3);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .theme-toggle {
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        color: var(--text-2);
+        border-radius: var(--radius-sm);
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all var(--transition);
+        flex-shrink: 0;
+      }
+      .theme-toggle:hover { background: var(--border); color: var(--text-1); }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+
+      .stat {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem 1.25rem;
+        transition: background var(--transition), border-color var(--transition);
+      }
+
+      .stat-label {
+        font-size: 11px;
+        font-family: 'DM Mono', monospace;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        margin-bottom: 6px;
+      }
+
+      .stat-val {
+        font-size: 1.75rem;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        color: var(--text-1);
+        line-height: 1;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .search-wrap {
+        flex: 1;
+        min-width: 180px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .search-wrap i {
+        position: absolute;
+        left: 12px;
+        color: var(--text-3);
+        font-size: 16px;
+        pointer-events: none;
+      }
+
+      .search-wrap input {
+        width: 100%;
+        padding: 0 12px 0 38px;
+        height: 40px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-1);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        outline: none;
+        transition: border-color var(--transition), background var(--transition);
+      }
+
+      .search-wrap input::placeholder { color: var(--text-3); }
+      .search-wrap input:focus { border-color: var(--border-strong); }
+
+      .btn-add {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 16px;
+        height: 40px;
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        border-radius: var(--radius-sm);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity var(--transition), transform var(--transition);
+        white-space: nowrap;
+      }
+
+      .btn-add:hover { opacity: 0.85; }
+      .btn-add:active { transform: scale(0.98); }
+      .btn-add i { font-size: 16px; }
+
+      #frame { position: relative; }
+
+      .table-wrap {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        overflow-x: auto;
+        transition: background var(--transition), border-color var(--transition);
+      }
+
+      table { width: 100%; border-collapse: collapse; min-width: 480px; }
+
+      thead th {
+        padding: 11px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-family: 'DM Mono', monospace;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+        background: var(--surface-2);
+      }
+
+      thead th:last-child { width: 48px; }
+
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background var(--transition);
+        animation: rowIn 0.2s ease both;
+      }
+
+      tbody tr:last-child { border-bottom: none; }
+      tbody tr:hover { background: var(--surface-2); }
+
+      @keyframes rowIn {
+        from { opacity: 0; transform: translateY(-4px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      td {
+        padding: 13px 16px;
+        font-size: 14px;
+        color: var(--text-1);
+        vertical-align: middle;
+      }
+
+      .td-email { color: var(--text-2); font-size: 13px; }
+      .td-phone { font-family: 'DM Mono', monospace; font-size: 12.5px; color: var(--text-2); }
+
+      .tag {
+        display: inline-block;
+        padding: 2px 9px;
+        border-radius: 99px;
+        font-size: 11.5px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .tag-work     { background: var(--tag-work-bg);     color: var(--tag-work-fg); }
+      .tag-personal { background: var(--tag-personal-bg); color: var(--tag-personal-fg); }
+      .tag-vip      { background: var(--tag-vip-bg);      color: var(--tag-vip-fg); }
+
+      .td-actions { text-align: right; white-space: nowrap; }
+
+      .btn-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: var(--radius-sm);
+        color: var(--text-3);
+        font-size: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--transition), color var(--transition);
+      }
+
+      .btn-icon:hover { background: var(--surface-2); color: var(--text-1); }
+      .btn-icon.delete:hover { background: var(--danger-bg); color: var(--danger); }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-3);
+        font-size: 14px;
+      }
+      .empty-state i { font-size: 36px; display: block; margin-bottom: 10px; }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      .overlay.open { display: flex; animation: fadeIn 0.15s ease; }
+
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+      .modal {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.75rem;
+        width: 100%;
+        max-width: 420px;
+        animation: slideUp 0.2s ease;
+      }
+
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(12px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .modal-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.25rem;
+        color: var(--text-1);
+      }
+
+      .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+      .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+
+      .field label {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: var(--text-2);
+        text-transform: uppercase;
+        font-family: 'DM Mono', monospace;
+      }
+
+      .field input, .field select {
+        height: 38px;
+        padding: 0 12px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-1);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        outline: none;
+        transition: border-color var(--transition), background var(--transition);
+        -webkit-appearance: none;
+      }
+
+      .field input::placeholder { color: var(--text-3); }
+      .field input:focus, .field select:focus { border-color: var(--border-strong); background: var(--surface); }
+
+      .field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23a8a8a5' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+
+      .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 6px; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+      .btn-cancel {
+        padding: 0 16px;
+        height: 36px;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text-2);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+      .btn-cancel:hover { background: var(--surface-2); color: var(--text-1); }
+
+      .btn-save {
+        padding: 0 20px;
+        height: 36px;
+        background: var(--accent);
+        border: none;
+        border-radius: var(--radius-sm);
+        color: var(--bg);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: opacity var(--transition);
+      }
+      .btn-save:hover { opacity: 0.85; }
+
+      .toast {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: var(--text-1);
+        color: var(--bg);
+        padding: 10px 18px;
+        border-radius: 99px;
+        font-size: 13.5px;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.2s, transform 0.2s;
+        pointer-events: none;
+        white-space: nowrap;
+        z-index: 200;
+      }
+      .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      .avatar {
+        width: 32px; height: 32px; border-radius: 50%;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        display: inline-flex; align-items: center; justify-content: center;
+        font-size: 12px; font-weight: 600; color: var(--text-2);
+        flex-shrink: 0; letter-spacing: 0.02em;
+      }
+
+      .name-cell { display: flex; align-items: center; gap: 10px; }
+
+      @media (max-width: 600px) {
+        .page-title { font-size: 1.4rem; }
+        .stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .stat { padding: 0.75rem 1rem; }
+        .stat-val { font-size: 1.4rem; }
+        .modal-row { grid-template-columns: 1fr; }
+        .td-email, .td-phone { display: none; }
+        thead th:nth-child(2), thead th:nth-child(3) { display: none; }
+      }
+    </style>
   </head>
   <body>
-    <h2 class="sr-only">
-      Contacts database manager — add, edit, search, and delete contacts
-    </h2>
-
+    <h2 class="sr-only">Contacts database manager — add, edit, search, and delete contacts</h2>
     <div id="app">
       <div class="page-header">
-        <div class="page-title">Contacts</div>
-        <div class="page-sub">local db &mdash; fetch / update / delete</div>
+        <div class="page-header-left">
+          <div class="page-title">Contacts</div>
+          <div class="page-sub">local db &mdash; fetch / update / delete</div>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <i class="ti ti-moon" id="theme-icon"></i>
+        </button>
       </div>
+
       <div class="stats">
         <div class="stat">
           <div class="stat-label">Total</div>
@@ -34,15 +465,11 @@
           <div class="stat-val" id="s-vip">0</div>
         </div>
       </div>
+
       <div class="toolbar">
         <div class="search-wrap">
           <i class="ti ti-search" aria-hidden="true"></i>
-          <input
-            id="search"
-            type="text"
-            placeholder="Search contacts…"
-            oninput="render()"
-          />
+          <input id="search" type="text" placeholder="Search contacts…" oninput="render()" />
         </div>
         <button class="btn-add" onclick="openModal()">
           <i class="ti ti-plus" aria-hidden="true"></i>Add contact
@@ -64,26 +491,27 @@
             <tbody id="tbody"></tbody>
           </table>
         </div>
+
         <div class="overlay" id="overlay">
           <div class="modal">
             <div class="modal-title" id="modal-title">New contact</div>
             <div class="modal-row">
               <div class="field">
-                <label>First name</label
-                ><input id="f-first" type="text" placeholder="Ada" />
+                <label>First name</label>
+                <input id="f-first" type="text" placeholder="Ada" />
               </div>
               <div class="field">
-                <label>Last name</label
-                ><input id="f-last" type="text" placeholder="Lovelace" />
+                <label>Last name</label>
+                <input id="f-last" type="text" placeholder="Lovelace" />
               </div>
             </div>
             <div class="field">
-              <label>Email</label
-              ><input id="f-email" type="email" placeholder="ada@example.com" />
+              <label>Email</label>
+              <input id="f-email" type="email" placeholder="ada@example.com" />
             </div>
             <div class="field">
-              <label>Phone</label
-              ><input id="f-phone" type="tel" placeholder="+1 (555) 000-0000" />
+              <label>Phone</label>
+              <input id="f-phone" type="tel" placeholder="+1 (555) 000-0000" />
             </div>
             <div class="field">
               <label>Tag</label>
@@ -99,10 +527,130 @@
             </div>
           </div>
         </div>
+
         <div class="toast" id="toast"></div>
       </div>
     </div>
 
-    <script type="module" src="./main.js"></script>
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        document.getElementById('theme-icon').className = isDark ? 'ti ti-moon' : 'ti ti-sun';
+      }
+
+      function initials(first, last) {
+        return ((first?.[0] || '') + (last?.[0] || '')).toUpperCase() || '?';
+      }
+
+      let contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+      let editingId = null;
+
+      function save() { localStorage.setItem('contacts', JSON.stringify(contacts)); }
+
+      function render() {
+        const q = (document.getElementById('search').value || '').toLowerCase();
+        const rows = q ? contacts.filter(c =>
+          (c.first + ' ' + c.last + ' ' + c.email + ' ' + c.phone).toLowerCase().includes(q)
+        ) : contacts;
+
+        document.getElementById('s-total').textContent = contacts.length;
+        document.getElementById('s-work').textContent = contacts.filter(c => c.tag === 'work').length;
+        document.getElementById('s-vip').textContent = contacts.filter(c => c.tag === 'vip').length;
+
+        const tbody = document.getElementById('tbody');
+        if (!rows.length) {
+          tbody.innerHTML = `<tr><td colspan="5"><div class="empty-state"><i class="ti ti-users" aria-hidden="true"></i>${q ? 'No matches found' : 'No contacts yet — add one!'}</div></td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = rows.map(c => `
+          <tr>
+            <td><div class="name-cell"><div class="avatar">${initials(c.first, c.last)}</div>${c.first} ${c.last}</div></td>
+            <td class="td-email">${c.email || '—'}</td>
+            <td class="td-phone">${c.phone || '—'}</td>
+            <td><span class="tag tag-${c.tag}">${c.tag}</span></td>
+            <td class="td-actions">
+              <button class="btn-icon" onclick="editContact('${c.id}')" title="Edit" aria-label="Edit ${c.first} ${c.last}"><i class="ti ti-edit" aria-hidden="true"></i></button>
+              <button class="btn-icon delete" onclick="deleteContact('${c.id}')" title="Delete" aria-label="Delete ${c.first} ${c.last}"><i class="ti ti-trash" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function openModal(reset = true) {
+        if (reset) {
+          editingId = null;
+          document.getElementById('modal-title').textContent = 'New contact';
+          ['f-first','f-last','f-email','f-phone'].forEach(id => document.getElementById(id).value = '');
+          document.getElementById('f-tag').value = 'work';
+        }
+        const ov = document.getElementById('overlay');
+        ov.style.display = 'flex';
+        requestAnimationFrame(() => ov.classList.add('open'));
+        document.getElementById('f-first').focus();
+      }
+
+      function closeModal() {
+        const ov = document.getElementById('overlay');
+        ov.classList.remove('open');
+        setTimeout(() => ov.style.display = 'none', 150);
+      }
+
+      function saveContact() {
+        const first = document.getElementById('f-first').value.trim();
+        const last  = document.getElementById('f-last').value.trim();
+        if (!first && !last) { showToast('Please enter a name'); return; }
+        const data = {
+          first, last,
+          email: document.getElementById('f-email').value.trim(),
+          phone: document.getElementById('f-phone').value.trim(),
+          tag:   document.getElementById('f-tag').value
+        };
+        if (editingId) {
+          const i = contacts.findIndex(c => c.id === editingId);
+          contacts[i] = { ...contacts[i], ...data };
+          showToast('Contact updated');
+        } else {
+          contacts.push({ ...data, id: crypto.randomUUID() });
+          showToast('Contact added');
+        }
+        save(); render(); closeModal();
+      }
+
+      function editContact(id) {
+        const c = contacts.find(x => x.id === id);
+        if (!c) return;
+        editingId = id;
+        document.getElementById('modal-title').textContent = 'Edit contact';
+        document.getElementById('f-first').value = c.first;
+        document.getElementById('f-last').value  = c.last;
+        document.getElementById('f-email').value = c.email;
+        document.getElementById('f-phone').value = c.phone;
+        document.getElementById('f-tag').value   = c.tag;
+        openModal(false);
+      }
+
+      function deleteContact(id) {
+        contacts = contacts.filter(c => c.id !== id);
+        save(); render(); showToast('Contact deleted');
+      }
+
+      function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+      }
+
+      document.getElementById('overlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('overlay')) closeModal();
+      });
+
+      render();
+    </script>
+    <script type="module" src="./main.js" onerror="void 0"></script>
   </body>
 </html>
