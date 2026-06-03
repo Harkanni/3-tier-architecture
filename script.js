@@ -32,7 +32,7 @@ async function loadContacts() {
 
     if (!response.ok) {
       throw new Error("Failed to fetch contacts");
-    }
+        }
 
     db = await response.json();
 
@@ -71,8 +71,9 @@ function render() {
   } else {
     tbody.innerHTML = rows
       .map((c) => {
-        const [bg, fg] = colorFor(c.first + c.last);
-        const tagCls = "tag tag-" + c.tag;
+        console.log(c);
+        const [bg, fg] = colorFor(c.firstName + c.lastName);
+        const tagCls = "tag tag-" + `${c.tag || 'work'}`;
 
         return `
           <tr>
@@ -82,12 +83,12 @@ function render() {
                   class="avatar"
                   style="background:${bg};color:${fg}"
                 >
-                  ${initials(c.first, c.last)}
+                  ${initials(c.firstName, c.lastName)}
                 </div>
 
                 <div>
                   <div class="name-text">
-                    ${c.first} ${c.last}
+                    ${c.firstName} ${c.lastName}
                   </div>
                 </div>
               </div>
@@ -98,12 +99,12 @@ function render() {
             </td>
 
             <td style="font-family:var(--mono);font-size:12px;color:var(--ink3)">
-              ${c.phone || ""}
+              ${c.phone || " - "}
             </td>
 
             <td>
               <span class="${tagCls}">
-                ${c.tag}
+                ${c.tag || 'work'}
               </span>
             </td>
 
@@ -111,8 +112,8 @@ function render() {
               <div class="row-actions">
                 <button
                   class="btn-icon"
-                  onclick="editContact('${c.id}')"
-                  aria-label="Edit ${c.first}"
+                  onclick="editContact('${c.userId}')"
+                  aria-label="Edit ${c.firstName}"
                 >
                   <i class="ti ti-edit"></i>
                 </button>
@@ -120,7 +121,7 @@ function render() {
                 <button
                   class="btn-icon del"
                   onclick="deleteContact('${c.id}')"
-                  aria-label="Delete ${c.first}"
+                  aria-label="Delete ${c.firstName}"
                 >
                   <i class="ti ti-trash"></i>
                 </button>
@@ -177,20 +178,20 @@ function closeModal() {
 }
 
 async function saveContact() {
-  const first = document.getElementById("f-first").value.trim();
-  const last = document.getElementById("f-last").value.trim();
+  const firstName = document.getElementById("f-first").value.trim();
+  const lastName = document.getElementById("f-last").value.trim();
   const email = document.getElementById("f-email").value.trim();
   const phone = document.getElementById("f-phone").value.trim();
   const tag = document.getElementById("f-tag").value;
 
-  if (!first || !last || !email) {
+  if (!firstName || !lastName || !email) {
     showToast("first name, last name & email required");
     return;
   }
 
   const payload = {
-    first,
-    last,
+    firstName,
+    lastName,
     email,
     phone,
     tag,
@@ -210,7 +211,7 @@ async function saveContact() {
 
       showToast("contact updated");
     } else {
-      response = await fetch(API_URL, {
+      response = await fetch("https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/insertuser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
