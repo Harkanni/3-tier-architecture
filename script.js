@@ -1,6 +1,6 @@
 const API_URL =
-//   "https://YOUR_API_URL.execute-api.us-east-1.amazonaws.com/prod/contacts";
-  "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod"
+  //   "https://YOUR_API_URL.execute-api.us-east-1.amazonaws.com/prod/contacts";
+  "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod";
 
 const COLORS = [
   ["#E6F1FB", "#185FA5"],
@@ -13,8 +13,7 @@ const COLORS = [
 
 function colorFor(name) {
   const i =
-    ((name.charCodeAt(0) || 0) + (name.charCodeAt(1) || 0)) %
-    COLORS.length;
+    ((name.charCodeAt(0) || 0) + (name.charCodeAt(1) || 0)) % COLORS.length;
 
   return COLORS[i];
 }
@@ -28,11 +27,13 @@ let editId = null;
 
 async function loadContacts() {
   try {
-    const response = await fetch("https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/users");
+    const response = await fetch(
+      "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/users",
+    );
 
     if (!response.ok) {
       throw new Error("Failed to fetch contacts");
-        }
+    }
 
     db = await response.json();
 
@@ -49,15 +50,7 @@ function getFiltered() {
   if (!q) return db;
 
   return db.filter((c) =>
-    (
-      c.first +
-      " " +
-      c.last +
-      c.email +
-      c.phone
-    )
-      .toLowerCase()
-      .includes(q)
+    (c.first + " " + c.last + c.email + c.phone).toLowerCase().includes(q),
   );
 }
 
@@ -73,7 +66,7 @@ function render() {
       .map((c) => {
         console.log(c);
         const [bg, fg] = colorFor(c.firstName + c.lastName);
-        const tagCls = "tag tag-" + `${c.tag || 'work'}`;
+        const tagCls = "tag tag-" + `${c.tag || "work"}`;
 
         return `
           <tr>
@@ -104,7 +97,7 @@ function render() {
 
             <td>
               <span class="${tagCls}">
-                ${c.tag || 'work'}
+                ${c.tag || "work"}
               </span>
             </td>
 
@@ -120,7 +113,7 @@ function render() {
 
                 <button
                   class="btn-icon del"
-                  onclick="deleteContact('${c.id}')"
+                  onclick="deleteContact('${c.userId}')"
                   aria-label="Delete ${c.firstName}"
                 >
                   <i class="ti ti-trash"></i>
@@ -135,11 +128,13 @@ function render() {
 
   document.getElementById("s-total").textContent = db.length;
 
-  document.getElementById("s-work").textContent =
-    db.filter((c) => c.tag === "work").length;
+  document.getElementById("s-work").textContent = db.filter(
+    (c) => c.tag === "work",
+  ).length;
 
-  document.getElementById("s-vip").textContent =
-    db.filter((c) => c.tag === "vip").length;
+  document.getElementById("s-vip").textContent = db.filter(
+    (c) => c.tag === "vip",
+  ).length;
 }
 
 function openModal(id = null) {
@@ -150,8 +145,7 @@ function openModal(id = null) {
 
     if (!c) return;
 
-    document.getElementById("modal-title").textContent =
-      "Edit contact";
+    document.getElementById("modal-title").textContent = "Edit contact";
 
     document.getElementById("f-first").value = c.firstName;
     document.getElementById("f-last").value = c.lastName;
@@ -159,11 +153,10 @@ function openModal(id = null) {
     document.getElementById("f-phone").value = c.phone || "";
     document.getElementById("f-tag").value = c.tag;
   } else {
-    document.getElementById("modal-title").textContent =
-      "New contact";
+    document.getElementById("modal-title").textContent = "New contact";
 
     ["f-first", "f-last", "f-email", "f-phone"].forEach(
-      (i) => (document.getElementById(i).value = "")
+      (i) => (document.getElementById(i).value = ""),
     );
 
     document.getElementById("f-tag").value = "work";
@@ -201,23 +194,29 @@ async function saveContact() {
     let response;
 
     if (editId) {
-      response = await fetch(`https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/edituser?userId=${editId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      response = await fetch(
+        `https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/edituser?userId=${editId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
+      );
 
       showToast("contact updated");
     } else {
-      response = await fetch("https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/insertuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      response = await fetch(
+        "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/insertuser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
+      );
 
       showToast("contact added");
     }
@@ -240,16 +239,17 @@ function editContact(id) {
 }
 
 async function deleteContact(id) {
-  const confirmed = confirm(
-    "Are you sure you want to delete this contact?"
-  );
+  const confirmed = confirm("Are you sure you want to delete this contact?");
 
   if (!confirmed) return;
 
   try {
-    const response = await fetch(`https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/deleteuser/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/deleteuser?userId=${id}`,
+      {
+        method: "DELETE",
+      },
+    );
 
     if (!response.ok) {
       throw new Error("Delete failed");
@@ -281,12 +281,10 @@ function showToast(msg) {
   }, 2200);
 }
 
-document
-  .getElementById("overlay")
-  .addEventListener("click", (e) => {
-    if (e.target === document.getElementById("overlay")) {
-      closeModal();
-    }
-  });
+document.getElementById("overlay").addEventListener("click", (e) => {
+  if (e.target === document.getElementById("overlay")) {
+    closeModal();
+  }
+});
 
 loadContacts();
