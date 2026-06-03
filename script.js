@@ -146,15 +146,15 @@ function openModal(id = null) {
   editId = id;
 
   if (id) {
-    const c = db.find((x) => String(x.id) === String(id));
+    const c = db.find((x) => String(x.userId) === String(id));
 
     if (!c) return;
 
     document.getElementById("modal-title").textContent =
       "Edit contact";
 
-    document.getElementById("f-first").value = c.first;
-    document.getElementById("f-last").value = c.last;
+    document.getElementById("f-first").value = c.firstName;
+    document.getElementById("f-last").value = c.lastName;
     document.getElementById("f-email").value = c.email;
     document.getElementById("f-phone").value = c.phone || "";
     document.getElementById("f-tag").value = c.tag;
@@ -201,7 +201,7 @@ async function saveContact() {
     let response;
 
     if (editId) {
-      response = await fetch(`${API_URL}/${editId}`, {
+      response = await fetch(`https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/edituser?userId=${editId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -247,7 +247,7 @@ async function deleteContact(id) {
   if (!confirmed) return;
 
   try {
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/deleteuser/${id}`, {
       method: "DELETE",
     });
 
@@ -255,7 +255,7 @@ async function deleteContact(id) {
       throw new Error("Delete failed");
     }
 
-    db = db.filter((c) => String(c.id) !== String(id));
+    db = db.filter((c) => String(c.userId) !== String(id));
 
     render();
 
