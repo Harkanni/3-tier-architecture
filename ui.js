@@ -12,7 +12,7 @@ const els = {
   sTotal:     () => $("s-total"),
   sWork:      () => $("s-work"),
   sVip:       () => $("s-vip"),
-  saveBtn:    () => $("save-btn"),
+  saveBtn:    () => document.querySelector(".btn-save"),
   form: {
     first:  () => $("f-first"),
     last:   () => $("f-last"),
