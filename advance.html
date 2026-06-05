@@ -1,0 +1,863 @@
+Claude finished the response
+
+Hi I want to re-edit a blog post i found. the blog post i s sought of a documentation procedure for creating a 3tier architecture of aws dynamodb, lambda and api gateway. 
+
+I want to just remove ant unneccessary while retaining the essence of the post. and also the images. i like the descriptive nature of the post
+13:46
+
+Please share the blog post content (text and/or images) and I'll help you trim it down while keeping the essence and descriptive style intact.
+
+The purpose is not to trim it really but to not make it too plagiairism
+13:46
+
+Got it! So you want to rewrite/paraphrase the blog post to make it original while:
+
+    Keeping the same structure and flow
+    Retaining the descriptive, informative tone
+    Preserving the images
+    Keeping all the technical accuracy
+
+Please go ahead and share the blog post (paste the text, or upload it as a file), and I'll rewrite it in a fresh, original voice.
+13:48
+Ran 13 commands, viewed a file
+Done
+
+Now I have all the content I need — the full step-by-step text and all image URLs. Let me now read the frontend-design skill and create the rewritten HTML blog post.
+Viewed 2 files
+
+Now I have everything I need. Let me create the rewritten blog post as a clean HTML file.
+Creating rewritten three-tier AWS blog post as a clean HTML file
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Building a Three-Tier Web App on AWS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1612;
+      --page: #faf8f4;
+      --accent: #d4500a;
+      --accent-light: #f5ede6;
+      --muted: #7a6f65;
+      --divider: #e8e2d9;
+      --code-bg: #f0ece4;
+      --highlight: #fff3cd;
+      --step-bg: #f7f4ef;
+      --tag-orange: #d4500a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--page);
+      color: var(--ink);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    /* ── Header ── */
+    .site-header {
+      border-bottom: 1px solid var(--divider);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .site-header .logo {
+      font-family: 'Lora', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .site-header .tag {
+      font-size: 0.7rem;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 4rem 2rem 2.5rem;
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .hero-label::after {
+      content: '';
+      display: inline-block;
+      height: 1px;
+      width: 40px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+    .hero p.subtitle {
+      font-size: 1.15rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+    /* ── Architecture image ── */
+    .arch-banner {
+      max-width: 780px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+    .arch-banner img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--divider);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .arch-banner figcaption {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      margin-top: 0.6rem;
+    }
+
+    /* ── Main content ── */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+
+    /* ── Section headers ── */
+    .section-tier {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 3.5rem 0 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--divider);
+    }
+    .tier-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .tier-badge.presentation { background: #e8f4e8; color: #2d6a2d; }
+    .tier-badge.logic { background: #e8eef8; color: #2d4a8a; }
+    .tier-badge.data { background: #f5e8ff; color: #6a2d8a; }
+    .tier-badge.connect { background: var(--accent-light); color: var(--accent); }
+
+    .section-tier h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* ── Body text ── */
+    .content p {
+      margin-bottom: 1.2rem;
+      color: #2e2925;
+    }
+    .content h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--ink);
+    }
+    .content h4 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin: 2rem 0 0.6rem;
+    }
+
+    /* ── Step blocks ── */
+    .step {
+      background: var(--step-bg);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .step .step-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .step p { margin-bottom: 0.5rem; }
+    .step p:last-child { margin-bottom: 0; }
+
+    /* ── Info callouts ── */
+    .callout {
+      background: #f0f7ff;
+      border: 1px solid #c5ddf7;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      font-size: 0.93rem;
+      color: #1a3a5c;
+    }
+    .callout.warning {
+      background: var(--highlight);
+      border-color: #e0c96e;
+      color: #5c4700;
+    }
+    .callout.success {
+      background: #efffef;
+      border-color: #9edba0;
+      color: #1a4d1f;
+    }
+    .callout strong {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Code ── */
+    code {
+      font-family: 'DM Mono', monospace;
+      background: var(--code-bg);
+      padding: 0.15em 0.45em;
+      border-radius: 4px;
+      font-size: 0.85em;
+      color: #8b3a00;
+    }
+    pre {
+      background: #1e1b18;
+      color: #e8e0d0;
+      padding: 1.25rem 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 1.65;
+    }
+    pre .comment { color: #7a6f65; }
+    pre .keyword { color: #d4af37; }
+    pre .string { color: #a8d8a8; }
+
+    /* ── Images ── */
+    .screenshot {
+      margin: 1.75rem 0;
+    }
+    .screenshot img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--divider);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .screenshot figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    /* ── Checklist ── */
+    .checklist {
+      list-style: none;
+      margin: 1rem 0 1.5rem;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.45rem 0;
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '○';
+      color: var(--accent);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* ── Prerequisites ── */
+    .prereq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin: 1.25rem 0 2rem;
+    }
+    .prereq-card {
+      background: white;
+      border: 1px solid var(--divider);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+    }
+    .prereq-card .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .prereq-card .title { font-weight: 500; color: var(--ink); }
+
+    /* ── Services banner ── */
+    .services-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .service-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--divider);
+      color: var(--muted);
+      background: white;
+    }
+
+    /* ── Divider ── */
+    hr.section-rule {
+      border: none;
+      border-top: 1px dashed var(--divider);
+      margin: 3rem 0;
+    }
+
+    /* ── Completion box ── */
+    .completion {
+      background: linear-gradient(135deg, #fdf6ee 0%, #f9f0e4 100%);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+    .completion img {
+      width: 80px;
+      margin-bottom: 1.25rem;
+    }
+    .completion h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.7rem;
+      margin-bottom: 0.75rem;
+    }
+    .completion p { color: var(--muted); max-width: 440px; margin: 0 auto; }
+
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+      .hero { padding: 2.5rem 1.25rem 1.75rem; }
+      .content { padding: 0 1.25rem 4rem; }
+      .arch-banner { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a class="logo" href="#">AWS Docs</a>
+    <span class="tag">Three-Tier Architecture</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label">Project Walkthrough</div>
+    <h1>Building a Three-Tier Web App on AWS</h1>
+    <p class="subtitle">A step-by-step guide to architecting a fully serverless web application using DynamoDB, Lambda, API Gateway, S3, and CloudFront.</p>
+    <div class="hero-meta">
+      <span>⏱ ~150 min</span>
+      <span>💰 $0 cost</span>
+      <span>🔥 Intermediate</span>
+    </div>
+  </section>
+
+  <!-- Final Architecture Image -->
+  <figure class="arch-banner">
+    <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/architecture-complete.png" alt="Complete three-tier architecture diagram" />
+    <figcaption>Final architecture — all three tiers connected end-to-end</figcaption>
+  </figure>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Overview -->
+    <p>Three-tier architecture is a tried-and-true way of organizing web applications. Instead of cramming all your code into one place, it splits things up into three distinct layers: the <strong>presentation tier</strong> (what the user sees), the <strong>logic tier</strong> (the brains that process requests), and the <strong>data tier</strong> (the database). Each layer has a clear responsibility, making the whole system easier to debug, scale, and maintain.</p>
+
+    <p>Think of it like a restaurant: the front-of-house staff handle customer interaction, the kitchen handles order preparation, and the pantry stores all the ingredients. In our case, those roles are played by S3/CloudFront, Lambda/API Gateway, and DynamoDB respectively.</p>
+
+    <h4>AWS Services Used</h4>
+    <div class="services-row">
+      <span class="service-chip">Amazon S3</span>
+      <span class="service-chip">Amazon CloudFront</span>
+      <span class="service-chip">AWS Lambda</span>
+      <span class="service-chip">Amazon API Gateway</span>
+      <span class="service-chip">Amazon DynamoDB</span>
+      <span class="service-chip">AWS IAM</span>
+    </div>
+
+    <h4>Prerequisites</h4>
+    <div class="prereq-grid">
+      <div class="prereq-card">
+        <div class="label">Required</div>
+        <div class="title">Active AWS Account</div>
+      </div>
+      <div class="prereq-card">
+        <div class="label">Part 1</div>
+        <div class="title">Website Delivery with CloudFront</div>
+      </div>
+      <div class="prereq-card">
+        <div class="label">Part 2</div>
+        <div class="title">APIs with Lambda + API Gateway</div>
+      </div>
+      <div class="prereq-card">
+        <div class="label">Part 3</div>
+        <div class="title">Fetch Data with AWS Lambda</div>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <strong>⚠ Heads up</strong>
+      If you haven't completed the prerequisite projects, budget at least four hours for this one. There's a lot of ground to cover!
+    </div>
+
+    <!-- ───────────────────────────────────────────────────── -->
+    <!-- TIER 1: PRESENTATION -->
+    <!-- ───────────────────────────────────────────────────── -->
+    <div class="section-tier">
+      <span class="tier-badge presentation">Tier 1</span>
+      <h2>Presentation Tier — S3 + CloudFront</h2>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/architecture-1.0.png" alt="Architecture diagram showing Tier 1" />
+      <figcaption>Architecture at the end of Tier 1 setup</figcaption>
+    </figure>
+
+    <p>The presentation tier handles everything the user directly sees and interacts with. Our goal here is to get a static website hosted on S3 and delivered globally through CloudFront.</p>
+
+    <h3>Step 1 — Create an S3 Bucket</h3>
+    <p>S3 (Simple Storage Service) acts as a scalable storage container for your website files. Think of it as a highly available hard drive in the cloud — it holds your HTML, CSS, and JavaScript until CloudFront needs to serve them.</p>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Navigate to the S3 console and create a new bucket. Bucket names must be globally unique across all of AWS, since they become part of the URL when static website hosting is enabled. Use a name like <code>yourname-threetier-abc123</code>.</p>
+      <p>Make sure you select the AWS region closest to you.</p>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-networks-cloudfront/processed_image_1.png" alt="S3 bucket creation screen" />
+      <figcaption>Creating the S3 bucket in the AWS console</figcaption>
+    </figure>
+
+    <h3>Step 2 — Upload Website Files</h3>
+    <p>Download the three website files for this project: <code>index.html</code>, <code>style.css</code>, and <code>script.js</code>. Each file serves a distinct purpose:</p>
+    <ul class="checklist">
+      <li><strong>index.html</strong> — the structural blueprint of the page</li>
+      <li><strong>style.css</strong> — fonts, colours, layout, and all visual presentation</li>
+      <li><strong>script.js</strong> — handles user interactions and API calls</li>
+    </ul>
+
+    <div class="callout">
+      <strong>💡 Static vs. Dynamic Websites</strong>
+      A static site runs its logic entirely in the browser — no backend calls needed. A dynamic site communicates with servers, databases, or APIs. Right now we're uploading files to S3, but since our app will eventually call Lambda and DynamoDB, it's a dynamic web application — we're just setting up the frontend layer first.
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-networks-cloudfront/processed_image_2.png" alt="Uploading files to S3" />
+      <figcaption>Uploading the three website files to S3</figcaption>
+    </figure>
+
+    <h3>Step 3 — Create a CloudFront Distribution</h3>
+    <p>Amazon CloudFront is a Content Delivery Network (CDN). Rather than serving your files from a single S3 bucket in one region, CloudFront caches copies of your content at edge locations around the world. The result: your users get fast load times regardless of where they're located.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-networks-cloudfront/high-step3.1.png" alt="CloudFront distribution setup" />
+      <figcaption>Setting up a new CloudFront distribution</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Configuration</div>
+      <p>In the Origin domain field, select your S3 bucket. Under the origin access settings, allow CloudFront to access your private S3 bucket — this gives CloudFront a dedicated "key" to fetch your files without making the bucket publicly accessible.</p>
+      <p>Leave the remaining settings at their defaults and click <code>Create distribution</code>.</p>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-networks-cloudfront/high-step3.2.png" alt="CloudFront origin settings" />
+      <figcaption>Configuring the origin domain and access settings</figcaption>
+    </figure>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-networks-cloudfront/high-step3.3.png" alt="Bucket policy for CloudFront" />
+      <figcaption>Updating the S3 bucket policy to grant CloudFront access</figcaption>
+    </figure>
+
+    <p>Once the distribution deploys, copy its domain name and open it in a browser. You should see your website loading over CloudFront. The presentation tier is complete!</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-networks-cloudfront/processed_image_24.png" alt="Website loaded through CloudFront" />
+      <figcaption>Website successfully served through CloudFront</figcaption>
+    </figure>
+
+    <!-- ───────────────────────────────────────────────────── -->
+    <!-- TIER 2: LOGIC -->
+    <!-- ───────────────────────────────────────────────────── -->
+    <div class="section-tier">
+      <span class="tier-badge logic">Tier 2</span>
+      <h2>Logic Tier — Lambda + API Gateway</h2>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/architecture-2.0.png" alt="Architecture diagram showing Tier 2" />
+      <figcaption>Architecture at the end of Tier 2 setup</figcaption>
+    </figure>
+
+    <p>The logic tier is where requests get processed. We'll use AWS Lambda to run code without provisioning any servers, and then place Amazon API Gateway in front of it to create a clean HTTP interface for the frontend to talk to.</p>
+
+    <h3>Step 4 — Create a Lambda Function</h3>
+    <p>AWS Lambda is a serverless compute service. You write your code, upload it, and Lambda handles everything else — provisioning machines, scaling up under load, and scaling back down when traffic drops. You're only billed for actual execution time.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-api/processed_image_1.png" alt="Lambda function creation" />
+      <figcaption>Creating a new Lambda function in the console</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Head to the Lambda console and create a new function. Select <code>Author from scratch</code>, choose <code>Node.js</code> as the runtime, and give it a descriptive name like <code>getUserData</code>.</p>
+    </div>
+
+    <h3>Step 5 — Write the Lambda Function Code</h3>
+    <p>The function will accept a <code>userId</code> parameter, look it up in a DynamoDB table, and return the matching record. Paste the following code into the inline editor, replacing the placeholder region with your own (e.g. <code>us-east-1</code>):</p>
+
+<pre><code><span class="comment">// Import individual components from the DynamoDB client package</span>
+<span class="keyword">import</span> { DynamoDBClient } <span class="keyword">from</span> <span class="string">"@aws-sdk/client-dynamodb"</span>;
+<span class="keyword">import</span> { DynamoDBDocumentClient, GetCommand } <span class="keyword">from</span> <span class="string">"@aws-sdk/lib-dynamodb"</span>;
+
+<span class="keyword">const</span> client = <span class="keyword">new</span> DynamoDBClient({ region: <span class="string">"YOUR_REGION"</span> });
+<span class="keyword">const</span> docClient = DynamoDBDocumentClient.from(client);
+
+<span class="keyword">export const</span> handler = <span class="keyword">async</span> (event) => {
+  <span class="keyword">const</span> userId = event.queryStringParameters?.userId;
+  <span class="keyword">const</span> params = {
+    TableName: <span class="string">"Users"</span>,
+    Key: { userId }
+  };
+  <span class="keyword">try</span> {
+    <span class="keyword">const</span> data = <span class="keyword">await</span> docClient.send(<span class="keyword">new</span> GetCommand(params));
+    <span class="keyword">return</span> {
+      statusCode: 200,
+      <span class="comment">// Allow CORS for all origins, replace '*' with specific domain in production</span>
+      headers: { <span class="string">"Access-Control-Allow-Origin"</span>: <span class="string">"YOUR_CLOUDFRONT_DOMAIN"</span> },
+      body: JSON.stringify(data.Item)
+    };
+  } <span class="keyword">catch</span> (err) {
+    <span class="keyword">return</span> { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+  }
+};</code></pre>
+
+    <div class="callout">
+      <strong>💡 AWS SDK in Lambda</strong>
+      Lambda functions interact with other AWS services through the AWS SDK. The SDK provides pre-built libraries for services like DynamoDB, S3, and SQS — so instead of writing raw HTTP calls, you import a purpose-built client and call readable methods like <code>GetCommand</code>.
+    </div>
+
+    <p>Click <code>Deploy</code> to save and activate the function. Watch for the "Deployment successful" confirmation in the bottom-right corner.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-api/processed_image_5.png" alt="Lambda code deployed" />
+      <figcaption>Lambda function code successfully deployed</figcaption>
+    </figure>
+
+    <h3>Step 6 — Create an API Gateway REST API</h3>
+    <p>An API (Application Programming Interface) is a contract that lets two software systems communicate. In our case, the browser needs a structured way to call Lambda — and that's exactly what API Gateway provides. It acts as the "front door", receiving HTTP requests from the website, routing them to Lambda, and passing the response back.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-api/processed_image_3.png" alt="API Gateway creation" />
+      <figcaption>Choosing the REST API type in API Gateway</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Configuration</div>
+      <p>In the API Gateway console, choose <code>REST API</code> → <code>Build</code>. Set the endpoint type to <code>Regional</code> (best for single-region apps with low latency requirements). Name the API something like <code>UserDataAPI</code>.</p>
+    </div>
+
+    <h3>Step 7 — Add a Resource and GET Method</h3>
+    <p>Resources represent the URL paths within your API (e.g. <code>/users</code>). Methods define what actions are allowed on that path — in our case, a <code>GET</code> request to retrieve user data.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-api/processed_image_7.png" alt="API resource and method" />
+      <figcaption>Creating the /users resource and GET method</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Create a new resource named <code>users</code> with path <code>/users</code>. Then create a <code>GET</code> method on that resource, setting the integration type to <code>Lambda Function</code> and enabling <code>Lambda Proxy Integration</code>. Select your <code>getUserData</code> function.</p>
+    </div>
+
+    <div class="callout">
+      <strong>💡 What is Lambda Proxy Integration?</strong>
+      Normally, API Gateway has to reformat the incoming request before Lambda can understand it, and then reformat the response before sending it back. With proxy integration enabled, API Gateway simply passes the entire raw request straight to Lambda and expects Lambda to construct the full HTTP response itself — including status codes and headers.
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-api/processed_image_8.png" alt="Lambda proxy integration setup" />
+      <figcaption>Enabling Lambda proxy integration on the GET method</figcaption>
+    </figure>
+
+    <h3>Step 8 — Deploy the API</h3>
+    <p>In API Gateway, changes aren't live until you explicitly deploy them to a stage. Think of stages as environments: you might have <code>dev</code>, <code>staging</code>, and <code>prod</code>. For now, we'll deploy directly to a <code>prod</code> stage.</p>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Go to <code>Actions → Deploy API</code>. Create a new stage called <code>prod</code> and confirm. Once deployed, you'll see an <strong>Invoke URL</strong> — this is the public endpoint for your API.</p>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-api/processed_image_9.png" alt="API deployment stage" />
+      <figcaption>Deploying the API to the prod stage</figcaption>
+    </figure>
+
+    <div class="callout warning">
+      <strong>⚠ Expected error</strong>
+      Opening the invoke URL right now will return an error — that's perfectly normal. The DynamoDB table doesn't exist yet. We'll fix that in the next tier.
+    </div>
+
+    <!-- ───────────────────────────────────────────────────── -->
+    <!-- TIER 3: DATA -->
+    <!-- ───────────────────────────────────────────────────── -->
+    <div class="section-tier">
+      <span class="tier-badge data">Tier 3</span>
+      <h2>Data Tier — DynamoDB</h2>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/architecture-3.0.png" alt="Architecture diagram showing Tier 3" />
+      <figcaption>Architecture at the end of Tier 3 setup</figcaption>
+    </figure>
+
+    <p>The data tier is responsible for storing and retrieving the application's data. We'll use Amazon DynamoDB — a fully managed NoSQL database that's built for low-latency access at any scale.</p>
+
+    <h3>Step 9 — Create a DynamoDB Table</h3>
+    <p>DynamoDB organizes data differently from a traditional relational database. Rather than rows in a fixed schema, it stores flexible <em>items</em> (think JSON objects). Each item needs a unique <strong>partition key</strong>, which DynamoDB uses to distribute data across its internal servers for fast lookups.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-lambda/processed_image_1.png" alt="DynamoDB create table" />
+      <figcaption>Creating a DynamoDB table with a userId partition key</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Configuration</div>
+      <p>Name the table <code>Users</code>. Set the partition key to <code>userId</code> with type <code>String</code>. Leave all other settings at their defaults and click <code>Create table</code>.</p>
+      <p><strong>Important:</strong> Create this table in the same region as your Lambda function.</p>
+    </div>
+
+    <h3>Step 10 — Add Sample Data</h3>
+    <p>While the table is being created, let's talk about what makes DynamoDB distinctive. It's <em>schema-less</em> — you can add items with completely different attribute sets without modifying a table structure first. This flexibility is one of the key advantages of NoSQL databases.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-lambda/processed_image_2.png" alt="DynamoDB adding an item" />
+      <figcaption>Switching to JSON view to insert an item</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Once the table status shows <code>Active</code>, open it and go to <code>Explore table items → Create item</code>. Switch to JSON view and turn off "DynamoDB JSON" so we can work with standard JSON. Paste the following:</p>
+    </div>
+
+<pre><code>{
+  <span class="string">"userId"</span>: <span class="string">"1"</span>,
+  <span class="string">"name"</span>: <span class="string">"Alex Johnson"</span>,
+  <span class="string">"email"</span>: <span class="string">"alex@example.com"</span>
+}</code></pre>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-lambda/processed_image_3.png" alt="Item created in DynamoDB" />
+      <figcaption>Sample user item successfully created in the table</figcaption>
+    </figure>
+
+    <h3>Step 11 — Grant Lambda Permission to Read DynamoDB</h3>
+    <p>By default, Lambda functions can't access other AWS services — you have to explicitly grant permissions through IAM. This is the principle of least privilege in action: every service only gets the access it genuinely needs.</p>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Open your Lambda function, go to the <code>Configuration → Permissions</code> tab, and click on the execution role name. This takes you to the IAM console. Attach the <code>AmazonDynamoDBReadOnlyAccess</code> policy (or <code>AmazonDynamoDBFullAccess</code> for this tutorial).</p>
+    </div>
+
+    <div class="callout">
+      <strong>💡 A note on permissions</strong>
+      <code>AmazonDynamoDBFullAccess</code> grants read and write access — handy for development, but too permissive for production. In a real application, you'd create a custom IAM policy scoped to only the specific table and operations your function requires.
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-lambda/processed_image_18.png" alt="IAM permissions for Lambda" />
+      <figcaption>Attaching DynamoDB permissions to the Lambda execution role</figcaption>
+    </figure>
+
+    <!-- ───────────────────────────────────────────────────── -->
+    <!-- TIER 4: CONNECTING -->
+    <!-- ───────────────────────────────────────────────────── -->
+    <div class="section-tier">
+      <span class="tier-badge connect">Final Step</span>
+      <h2>Connecting All Three Tiers</h2>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/architecture-4.0.png" alt="Final architecture diagram" />
+      <figcaption>All three tiers connected — the complete architecture</figcaption>
+    </figure>
+
+    <p>All the pieces are in place. Now we just need to wire them together so the frontend can talk to the backend, and the backend can talk to the database.</p>
+
+    <h3>Step 12 — Update script.js with Your API Endpoint</h3>
+    <p>Your website's <code>script.js</code> currently has a placeholder URL where the API Gateway invoke URL should go. We need to replace that placeholder with your actual endpoint.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/processed_image_9.png" alt="script.js update" />
+      <figcaption>Updating the API endpoint URL in script.js</figcaption>
+    </figure>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Download <code>script.js</code> from your S3 bucket. Open it locally and find line 9, which references the API URL. Replace the placeholder with your API Gateway invoke URL — it should look like <code>https://xxxxxxxx.execute-api.REGION.amazonaws.com/prod/users</code>.</p>
+      <p>Re-upload the updated file to your S3 bucket, replacing the original.</p>
+    </div>
+
+    <h3>Step 13 — Fix the CORS Error</h3>
+    <p>Once the updated file is live, visit your CloudFront URL and try looking up a user. You'll likely hit a CORS error. Here's why:</p>
+
+    <p>CORS (Cross-Origin Resource Sharing) is a browser security feature that prevents websites from making requests to a different domain without explicit permission. Your frontend is hosted at a CloudFront URL, but it's calling API Gateway at a completely different domain. The browser blocks this by default.</p>
+
+    <div class="callout warning">
+      <strong>⚠ CORS error in the browser</strong>
+      Open your browser's developer tools (press F12) and check the Console tab. You'll see a message like: <em>"Access to fetch at 'https://…' from origin 'https://…cloudfront.net' has been blocked by CORS policy."</em>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/processed_image_6.png" alt="CORS error in browser console" />
+      <figcaption>The CORS error visible in the browser's developer tools</figcaption>
+    </figure>
+
+    <p>The fix requires two changes: enabling CORS in API Gateway <em>and</em> adding the correct response headers inside the Lambda function (because we're using proxy integration, Lambda is responsible for constructing the full HTTP response).</p>
+
+    <h4>Enable CORS in API Gateway</h4>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>In API Gateway, select your <code>/users</code> resource and choose <code>Actions → Enable CORS</code>. Under <code>Access-Control-Allow-Origin</code>, enter your CloudFront domain name (e.g. <code>https://d1xxxxxxxx.cloudfront.net</code>). Check both <code>GET</code> and <code>OPTIONS</code> methods, then confirm.</p>
+      <p>Redeploy the API to the <code>prod</code> stage for the changes to take effect.</p>
+    </div>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/processed_image_17.png" alt="CORS configuration in API Gateway" />
+      <figcaption>Enabling CORS and entering the CloudFront origin</figcaption>
+    </figure>
+
+    <h4>Add CORS Headers to the Lambda Response</h4>
+
+    <div class="step">
+      <div class="step-num">Action</div>
+      <p>Update your Lambda function to include the <code>Access-Control-Allow-Origin</code> header in every response. Replace the <code>*</code> wildcard with your specific CloudFront domain for better security:</p>
+    </div>
+
+<pre><code>headers: {
+  <span class="string">"Access-Control-Allow-Origin"</span>: <span class="string">"https://YOUR_CLOUDFRONT_DOMAIN"</span>,
+  <span class="string">"Content-Type"</span>: <span class="string">"application/json"</span>
+},</code></pre>
+
+    <p>Click <code>Deploy</code> to save the updated Lambda code.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/processed_image_12.png" alt="Lambda function with CORS headers" />
+      <figcaption>Lambda function updated to include CORS response headers</figcaption>
+    </figure>
+
+    <h3>Step 14 — Test the Completed Application</h3>
+    <p>With CORS resolved, head back to your CloudFront URL, enter <code>1</code> in the userId field, and click the search button. You should see the user data fetched directly from DynamoDB, passed through Lambda, routed via API Gateway, and displayed on your website.</p>
+
+    <figure class="screenshot">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/processed_image_3.png" alt="Working three-tier app" />
+      <figcaption>DynamoDB data successfully displayed on the CloudFront-hosted website</figcaption>
+    </figure>
+
+    <div class="callout success">
+      <strong>✅ All three tiers are live!</strong>
+      Your S3/CloudFront frontend is calling API Gateway, which triggers Lambda, which reads from DynamoDB — and the response flows all the way back to the browser.
+    </div>
+
+    <hr class="section-rule" />
+
+    <!-- Cleanup -->
+    <h3>Cleanup — Avoid Ongoing Charges</h3>
+    <p>Once you've verified everything is working, delete the resources to prevent unexpected AWS bills. Work through them in this order:</p>
+    <ul class="checklist">
+      <li><strong>CloudFront:</strong> Disable the distribution first, wait for the status to change to <code>Disabled</code>, then delete it. If you delete S3 first, the distribution will point to nothing and may cause errors during deletion.</li>
+      <li><strong>S3:</strong> Empty the bucket (delete all objects), then delete the bucket itself.</li>
+      <li><strong>API Gateway:</strong> Delete the REST API from the API Gateway console.</li>
+      <li><strong>Lambda:</strong> Delete the <code>getUserData</code> function.</li>
+      <li><strong>DynamoDB:</strong> Delete the <code>Users</code> table. Choose to keep CloudWatch alarms to avoid additional charges.</li>
+    </ul>
+
+    <hr class="section-rule" />
+
+    <!-- Completion -->
+    <div class="completion">
+      <img src="https://learn.nextwork.org/projects/static/aws-compute-threetier/trophy.png" alt="Trophy" />
+      <h2>Project Complete 🎉</h2>
+      <p>You've built and deployed a fully serverless three-tier web application on AWS — from static hosting through to live database queries. That's a genuinely impressive architecture to have under your belt.</p>
+    </div>
+
+  </div><!-- /content -->
+
+</body>
+</html>

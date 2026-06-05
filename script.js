@@ -1,6 +1,5 @@
 const API_URL =
-  //   "https://YOUR_API_URL.execute-api.us-east-1.amazonaws.com/prod/contacts";
-  "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod";
+  "https://YOUR_API_URL.execute-api.us-east-1.amazonaws.com/prod/contacts";
 
 const COLORS = [
   ["#E6F1FB", "#185FA5"],
@@ -27,9 +26,7 @@ let editId = null;
 
 async function loadContacts() {
   try {
-    const response = await fetch(
-      "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/users",
-    );
+    const response = await fetch(`${API_URL}/users`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch contacts");
@@ -64,7 +61,6 @@ function render() {
   } else {
     tbody.innerHTML = rows
       .map((c) => {
-        console.log(c);
         const [bg, fg] = colorFor(c.firstName + c.lastName);
         const tagCls = "tag tag-" + `${c.tag || "work"}`;
 
@@ -194,29 +190,23 @@ async function saveContact() {
     let response;
 
     if (editId) {
-      response = await fetch(
-        `https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/edituser?userId=${editId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+      response = await fetch(`${API_URL}/edituser?userId=${editId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(payload),
+      });
 
       showToast("contact updated");
     } else {
-      response = await fetch(
-        "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/insertuser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+      response = await fetch(`${API_URL}/insertuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(payload),
+      });
 
       showToast("contact added");
     }
@@ -244,12 +234,9 @@ async function deleteContact(id) {
   if (!confirmed) return;
 
   try {
-    const response = await fetch(
-      `https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod/deleteuser?userId=${id}`,
-      {
-        method: "DELETE",
-      },
-    );
+    const response = await fetch(`${API_URL}/deleteuser?userId=${id}`, {
+      method: "DELETE",
+    });
 
     if (!response.ok) {
       throw new Error("Delete failed");
