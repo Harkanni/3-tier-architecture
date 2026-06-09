@@ -1,4 +1,4 @@
-const API_URL = "https://YOUR_API_URL.execute-api.us-east-1.amazonaws.com/prod/contacts";
+const API_URL = "https://12ytb8w5x1.execute-api.us-east-1.amazonaws.com/prod";
 
 
 const COLORS = [
